@@ -1,6 +1,6 @@
 import { createServerFn } from '@tanstack/react-start';
+import { neon } from '@neondatabase/serverless';
 import { z } from 'zod';
-import { bindings } from './bindings.server';
 
 const inquirySchema = z.object({
  name: z.string().trim().min(2, 'Please enter your name.').max(100),
@@ -13,18 +13,21 @@ const inquirySchema = z.object({
 export const submitInquiry = createServerFn({ method: 'POST' })
  .inputValidator(inquirySchema)
  .handler(async ({ data }) => {
-  const db = bindings().DB;
-  if (!db) throw new Error('The inquiry form is temporarily unavailable. Please try again later.');
+  const url = process.env.DATABASE_URL;
+  if (!url) throw new Error('The inquiry form is temporarily unavailable. Please try again later.');
+  const sql = neon(url);
   const receipt = crypto.randomUUID();
   const now = Date.now();
   try {
-   const result = await db.prepare(`INSERT INTO inquiries (id,name,email,brand,brief,created_at)
-    SELECT ?,?,?,?,?,? WHERE (SELECT COUNT(*) FROM inquiries WHERE email=? AND created_at>?) < 3`)
-    .bind(receipt,data.name,data.email,data.brand,data.brief,now,data.email,now-3600000).run();
-   if (!result.meta.changes) throw new Error('RATE_LIMIT');
+   const rows = await sql`INSERT INTO inquiries (id,name,email,brand,brief,created_at)
+    SELECT ${receipt},${data.name},${data.email},${data.brand},${data.brief},${now}
+    WHERE (SELECT COUNT(*) FROM inquiries WHERE email=${data.email} AND created_at>${now - 3600000}) < 3
+    RETURNING id`;
+   if (!rows.length) throw new Error('RATE_LIMIT');
    return { receipt };
   } catch (error) {
    if (error instanceof Error && error.message === 'RATE_LIMIT') throw new Error('Please wait an hour before sending another inquiry.');
+   console.error(error);
    throw new Error('Your inquiry could not be saved. Please try again.');
   }
  });

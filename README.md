@@ -7,7 +7,7 @@ Complete portable source export of the VESAGE website, including the latest busi
 - React 19 + TanStack Start website source, custom styles and responsive layouts.
 - All current portfolio projects and additional Ember House / Noor & Bean work.
 - Eleven web-ready portfolio films, the identity film, photos, thumbnails, social covers, icons and locally hosted fonts.
-- Full-resolution supplied originals in `original-media/`.
+- Full-resolution supplied originals in `original-media/` (kept out of git; see `media-manifest.json`).
 - Contact form code and database migration, with validation and submission rate limiting.
 - A readable copy document: `WEBSITE-COPY.md`.
 - `media-manifest.json` linking original files to their website copies, with original-file SHA-256 checksums.
@@ -20,34 +20,34 @@ Install Bun 1.3 or newer and Node.js 22.12 or newer. From this folder:
 
 ```sh
 bun install
-bun run build
-bun run db:local
-bun run preview
+bun run dev
 ```
 
-Open the local URL printed by Wrangler (normally `http://localhost:8787`). The database is local during this preview. A Cloudflare login is not required for local development.
+Open the local URL Vite prints (normally `http://localhost:5173`). This is a hot-reload development server. The contact form needs `DATABASE_URL` (see below); without it the form reports that it is temporarily unavailable and the rest of the site works normally.
 
-After editing source files, run `bun run build` again. `bun run dev` builds and starts the local preview in one command; it is not a hot-reload development server.
-
-## Deploy to your own Cloudflare account
-
-1. Authenticate and create a database:
+To exercise the exact bundle Vercel runs:
 
 ```sh
-bunx wrangler login
-bunx wrangler d1 create vesage-inquiries
+npm run vercel-build
+npm run smoke
 ```
 
-2. In `wrangler.jsonc`, replace the all-zero `database_id` with the ID returned by the create command. The all-zero ID is a local-development placeholder, not a production database.
-3. Set your public domain in `src/site.ts`. This controls canonical and social metadata URLs.
-4. Apply the migration and deploy:
+## Deploy to Vercel
+
+1. Import the repository at [vercel.com/new](https://vercel.com/new). `vercel.json` sets the build command; no framework preset is needed.
+2. Create a Postgres database (Vercel's Storage tab, or any Neon database) and attach it to the project. It must expose `DATABASE_URL` as an environment variable.
+3. Apply the migration once, from this folder:
 
 ```sh
-bun run db:remote
-bun run deploy
+DATABASE_URL='<your connection string>' bun run db:push
 ```
 
-5. Configure your custom domain in Cloudflare if desired. Hosting charges and account limits depend on your provider and plan.
+4. Set your public domain in `src/site.ts`. This controls canonical and social metadata URLs.
+5. Redeploy. Add a custom domain in the Vercel dashboard if desired.
+
+`npm run vercel-build` produces a Build Output API v3 directory in `.vercel/output`: `dist/client` becomes the static CDN payload, and `dist/server` plus `scripts/vercel-entry.mjs` become a single Node function that server-renders every non-static request.
+
+Hosting charges and account limits depend on your provider and plan. The portfolio films total roughly 98 MB; watch your bandwidth allowance if traffic is heavy.
 
 The live VESAGE site is not modified by this export. Deploying this project creates a separately managed website in your account.
 
@@ -80,7 +80,7 @@ The separate UNIQLO catalogue film was not present in the available uploads, so 
 
 ## Contact form and privacy
 
-The form stores inquiries in the configured D1 database and returns a receipt. It does not send email notifications. There is no public page listing submissions. Review submissions using your own authenticated database tools.
+The form stores inquiries in the Postgres database named by `DATABASE_URL` and returns a receipt. It does not send email notifications. There is no public page listing submissions. Review submissions using your own authenticated database tools.
 
 No existing customer submissions, account credentials, API keys, authentication tokens or production database identifiers are included. Local test databases and dependency caches are also excluded.
 
@@ -90,6 +90,7 @@ No existing customer submissions, account credentials, API keys, authentication 
 - `public/`: website media and icons.
 - `original-media/`: archival full-resolution supplied media.
 - `migrations/`: inquiry database schema.
+- `scripts/`: Vercel build assembler, function entry, migration runner and smoke test.
 - Configuration files and dependency lockfile.
 
 Run `bun run build` to create `dist/`, containing the deployable server and client bundles. Installed dependencies and build output are not duplicated in the ZIP, keeping the package smaller.
