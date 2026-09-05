@@ -1,7 +1,7 @@
 // Vercel Node function -> the web `fetch` handler in dist/server/server.js.
 import { Readable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
-import server from './server.js';
+import server from './server.mjs';
 
 export default async function handler(req, res) {
  const proto = req.headers['x-forwarded-proto'] ?? 'https';
