@@ -10,9 +10,7 @@ export default {
    return applySecurityHeaders(await handler.fetch(request,env,ctx));
   }catch(error){
    console.error(error);
-   // TEMP diagnostic: echo the failure reason until the Vercel deploy is green, then revert to the bare message.
-   const detail=error instanceof Error?`${error.name}: ${error.message}`:String(error);
-   return applySecurityHeaders(new Response(`This page could not load. Please try again.\n\n${detail}`,{status:500,headers:{'content-type':'text/plain; charset=utf-8'}}));
+   return applySecurityHeaders(new Response('This page could not load. Please try again.',{status:500,headers:{'content-type':'text/plain; charset=utf-8'}}));
   }
  }
 };
