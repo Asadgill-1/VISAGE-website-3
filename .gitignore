@@ -11,3 +11,4 @@ dist/
 # raw masters (384MB) - not used by build, see media-manifest.json
 original-media/
 .vercel/
+.probe.mjs
