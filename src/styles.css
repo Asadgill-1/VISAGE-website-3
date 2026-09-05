@@ -1,0 +1,7 @@
+@layer reset, theme, base, components, utilities;
+@import "tailwindcss";
+@import "@fontsource-variable/jetbrains-mono";
+@import "./vesage.css";
+@import "./vesage-business.css";
+@import "./vesage-marketing-kit.css";
+@theme { --spacing: 0.25rem; }

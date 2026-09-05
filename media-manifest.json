@@ -1,0 +1,81 @@
+[
+  {
+    "original": "original-media/uniqlo-indoor.mp4",
+    "website_media": "public/assets/videos/uniqlo-indoor.mp4",
+    "original_sha256": "a67272a8c2c840cd3696aa28dda9405345faa92e906e2dc2ceaf3911c0b10dfd"
+  },
+  {
+    "original": "original-media/uniqlo-outdoor.mp4",
+    "website_media": "public/assets/videos/uniqlo-outdoor.mp4",
+    "original_sha256": "63e32d8894169bfe38d5979302773bb90d295674025cd55720bf80b9349bc783"
+  },
+  {
+    "original": "original-media/brunello-cinematic.mp4",
+    "website_media": "public/assets/videos/brunello-cinematic.mp4",
+    "original_sha256": "8e5840480e58707694c370294f0b362138c25440033135fd650fd09732e3dca7"
+  },
+  {
+    "original": "original-media/cloud-nine-splash-pops.mp4",
+    "website_media": "public/assets/videos/cloud-nine-splash-pops.mp4",
+    "original_sha256": "82c8853b30f8e78d91c7c807734bfcca36078960c2ac16812477d296bc1ec758"
+  },
+  {
+    "original": "original-media/brunello-product-motion.mp4",
+    "website_media": "public/assets/videos/brunello-product-motion.mp4",
+    "original_sha256": "ff20e334c6e4179109555931d07fc9a1c24fdf1ea4d9968e5b85229e399c9190"
+  },
+  {
+    "original": "original-media/tiffany-product-story.mp4",
+    "website_media": "public/assets/videos/tiffany-product-story.mp4",
+    "original_sha256": "80366a4c59e817e1f59141daec6b091d0396ebba332e2e5587543dbef095d127"
+  },
+  {
+    "original": "original-media/tiffany-brand-cinematic.mp4",
+    "website_media": "public/assets/videos/tiffany-brand-cinematic.mp4",
+    "original_sha256": "a286ea151b1b3e3d48f32e770590b4c036dbccdea6dd25df710e3b181372aa23"
+  },
+  {
+    "original": "original-media/aura-royale-motion.mp4",
+    "website_media": "public/assets/videos/aura-royale-motion.mp4",
+    "original_sha256": "1a9add43cc8d56665746c1142ce2afa99ae81bb093f68b5329a0bf5acda00a08"
+  },
+  {
+    "original": "original-media/ember-house-film.mp4",
+    "website_media": "public/assets/videos/ember-house-film.mp4",
+    "original_sha256": "d7c48f5d23624218bdfef2d86c94b843336a8e8df39b7ba4e67508a95b5e12d0"
+  },
+  {
+    "original": "original-media/noor-bean-product.mp4",
+    "website_media": "public/assets/videos/noor-bean-product.mp4",
+    "original_sha256": "5e1edcd09f8dd21727391777cee67070e0aa88374ef3fad62e5be64cdb605fcd"
+  },
+  {
+    "original": "original-media/noor-bean-lifestyle.mp4",
+    "website_media": "public/assets/videos/noor-bean-lifestyle.mp4",
+    "original_sha256": "58dbfc8dd8476f4cef0d5ae9ed5b9d5f69323daf4cb820b8924adcb9287cff41"
+  },
+  {
+    "original": "original-media/aura-royale-original.jpg",
+    "original_sha256": "51e1065bd17b80fa31ddb9d7e486dd72332b474bcff25b6910d960a6a50bef71"
+  },
+  {
+    "original": "original-media/noor-bean-logo.png",
+    "original_sha256": "e820d03e57b03511b2a019735b92e6197f009576f89c4c3d40f8ee563985d4b3"
+  },
+  {
+    "original": "original-media/ember-house-home.png",
+    "original_sha256": "1ee2b6c370139a331b3ac2d8ec93c3e6dd8a975daeab3e0415b30c62dd7e4d0d"
+  },
+  {
+    "original": "original-media/noor-bean-poster.png",
+    "original_sha256": "ed61f4e384f9a6715fcb5886bfad05e53b0209ca8f1336eadd4977e63134eb0a"
+  },
+  {
+    "original": "original-media/ember-house-fireplace.png",
+    "original_sha256": "6d7d463b2b943c8289e9850ae359bc38e67d72bd3a8be21821bcceb4394adf33"
+  },
+  {
+    "original": "original-media/ember-house-packaging.png",
+    "original_sha256": "d071b9753643f89c643f71d8b36276bb1306c3eb01443d5cfb0740ee14b223cb"
+  }
+]

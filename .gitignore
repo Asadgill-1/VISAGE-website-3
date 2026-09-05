@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.wrangler/
+.vite/
+.output/
+.env
+.env.*
+.dev.vars
+*.log
+
+# raw masters (384MB) - not used by build, see media-manifest.json
+original-media/
